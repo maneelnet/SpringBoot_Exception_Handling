@@ -41,11 +41,7 @@ public class BookController {
     @PostMapping(value = "/books")
     ResponseEntity<?> createBook(@RequestBody Book book) {
         Book addedBook = bookService.createBook(book);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(addedBook.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.ok().body(addedBook);
     }
 
     @PutMapping(value = "/books/{id}")
